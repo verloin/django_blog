@@ -1,0 +1,27 @@
+{% extends '_base.html' %}
+{% load static %}
+
+
+{% block content %}
+        <div class="contaiter-create-post">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <h1>Create post</h1>
+                    <br>
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <p class="card-title">{{ form.title }}</p><br>
+                                <p class="card-title">{{ form.author }}</p><br>
+                                <p class="card-title">{{ form.body }}</p>
+                            </div>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-success">Add post</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load blog_tags %}
+
+{% block content %}
+
+    <div class="container-detail">
+      <div class="row">
+        <div class="card mb-4  mt-3 left  top">
+          <div class="card-body">
+              <h2 class="card-title">{{ post.title }}</h2>
+              <p class="card-text text-muted h6 date">Published {{ post.publish }} by {{ post.author }}</p>
+              <br>
+              {{ post.body|markdown }}
+              <br>
+              <p><a href="{% url "home:post_share" post.id %}" class="btn btn-info">Share this post</a></p>
+              <br>
+              <a href="{% url 'home:home' %}" class="btn btn-primary">Back to the list</a>
+          </div>
+        </div>
+      </div>
+        {% with comments.count as total_comments %}
+        <h2>
+            {{ total_comments }} comment{{ total_comments|pluralize }}
+        </h2>
+    {% endwith %}
+
+    <h2>Similar posts</h2>
+    {% for post in similar_posts %}
+        <p>
+            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+        </p>
+    {% empty %}
+        There are no similar posts yet.
+    {% endfor %}
+
+        <div class="row">
+            <div class="col-md-8 card mb-4  mt-3 left  top">
+              <div class="card-body">
+
+                {% for comment in comments %}
+                <div class="comment">
+                    <p class="info">
+                        Comment {{ forloop.counter }} by {{ comment.name }}
+                        {{ comment.created }}
+                    </p>
+                    {{ comment.body|linebreaks }}
+                </div>
+                {% empty %}
+                <p>There are no comments yet.</p>
+                {% endfor %}
+
+                {% if new_comment %}
+                    <h2>Your comment has been added.</h2>
+                {% else %}
+                    <br>
+                    <h2>Add a new comment</h2>
+                    <br>
+                    <form action="." method="post">
+                        {{ comment_form.as_p }}
+                        {% csrf_token %}
+                        <br>
+                        <p><input type="submit" class="btn btn-info" value="Add comment"></p>
+                        <br>
+                    </form>
+                {% endif %}
+              </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock content %}

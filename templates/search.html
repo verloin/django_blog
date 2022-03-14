@@ -1,0 +1,38 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block content %}
+
+{#<form class="navbar-form" role="search">#}
+{#    <div class="input-group" style="width: 180px;">#}
+{#        <input type="text" autocomplete="off" class="form-control" placeholder="Search" name="search" id="search-input">#}
+{#        <span class="input-group-btn">#}
+{#            <button class="btn" id="srchbtn" type="btn-default">#}
+{#                <i class="fa fa-search" aria-hidden="true"></i>#}
+{#            </button>#}
+{#        </span>#}
+{#    </div>#}
+{#</form>#}
+<form action="{% url 'search:search' %}" method="get">
+  <input name="title" type="text" placeholder="Search...">
+</form>
+
+<div class="container-search">
+    <div class="row" style="width: 45%;">
+        <!-- Blog Entries Column -->
+        <div class="col-md-12 mt-3">
+            {% for post in object_list %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">{{ post.title }}</h2>
+                    <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_on}} </p>
+{#                    <p class="card-text">{{post.content|slice:":200" }}</p>#}
+                    <br>
+                    <a href="{% url 'post_detail:post_detail' %}" class="btn btn-primary">Read More &rarr;</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{%endblock content %}

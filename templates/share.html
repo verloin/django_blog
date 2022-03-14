@@ -1,0 +1,43 @@
+{% extends '_base.html' %}
+{% load static %}
+
+
+
+{% block title %}Share a post{% endblock %}
+{% block content %}
+
+<div class="container_share">
+    {% if sent %}
+        <h1>E-mail successfully sent</h1>
+        <p>
+            "{{ post.title }}" was successfully sent to {{ cd.to }}.
+        </p>
+    {% else %}
+        <h1>Share "{{ post.title }}" by e-mail</h1>
+        <form method="post">
+            <br>
+{#                {{ form.as_p }}#}
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input type="name" name="name" class="form-control" id="name" placeholder="Name">
+                </div>
+                <br>
+                <div class="form-group">
+                    <input type="email" name="email" class="form-control" id="email1" placeholder="Email">
+                </div>
+                <br>
+                <div class="form-group">
+                    <input type="phone" name="phone" class="form-control" id="phone" placeholder="Phone">
+                </div>
+                <br>
+                <div class="form-group">
+                    <textarea class="form-control" name="message" rows="3"></textarea>
+                </div>
+                <br>
+            </div>
+        </form>
+        {% csrf_token %}
+        <input type="submit" class="btn btn-info" value="Send e-mail">
+    {% endif %}
+</div>
+{% endblock %}

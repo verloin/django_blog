@@ -1,0 +1,37 @@
+body {
+    margin: 0 20px 0 20px;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    background-color: #fdfdfd;
+}
+
+a {
+    text-decoration: none; /* Убираем подчёркивание */
+}
+
+.wrapper-page {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 5%;
+}
+
+.container-detail {
+    max-width: 63%;
+    padding-right: 10%;
+}
+
+.container_share {
+    margin-top: 6%;
+    margin-left: 6%;
+}
+
+.container-base {
+    max-width: 63%;
+    padding-right: 10%;
+}
+
+.contaiter-create-post {
+    margin: 0 18%;
+}
+
+
