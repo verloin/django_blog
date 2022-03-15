@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView
 from django.core.mail import send_mail
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render, get_object_or_404
@@ -161,9 +162,15 @@ def post_search(request):
     )
 
 
-# def create_post(request):
-#     form = PostForm()
-#     create = {
-#         'form': form
-#     }
-#     return render(request, 'create_post.html', create)
+class AccountLogin(LoginView):
+    template_name = 'login.html'
+
+    def form_valid(self, form):
+        result = super().form_valid(form)
+
+        messages.success(
+            self.request,
+            f'User {self.request.user.username} logged in successfully'
+        )
+
+        return result

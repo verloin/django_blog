@@ -42,8 +42,9 @@ INSTALLED_APPS = [
 
     'home',
     'taggit',
-    'django.contrib.sites',
+    # 'django.contrib.sites',
     'django.contrib.sitemaps',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -150,3 +151,7 @@ EMAIL_HOST_USER = 'ym@leads.su'
 EMAIL_HOST_PASSWORD = 'dfvgbh@324ww@'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+
+LOGIN_REDIRECT_URL = ''
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

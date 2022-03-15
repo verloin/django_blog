@@ -3,15 +3,17 @@ body {
     font-family: "Roboto", sans-serif;
     font-size: 18px;
     background-color: #fdfdfd;
+
 }
 
 a {
     text-decoration: none; /* Убираем подчёркивание */
+    outline: none !important;
 }
 
 .wrapper-page {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin: 0 5%;
 }
 
@@ -34,4 +36,7 @@ a {
     margin: 0 18%;
 }
 
+.container-login {
+    margin: 5% 0 0 20%;
+}
 
