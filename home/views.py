@@ -38,12 +38,6 @@ def post_list(request, tag_slug=None):
             'tag': tag
         })
 
-# class PostListView(ListView):
-#     queryset = Post.objects.all()
-#     context_object_name = 'posts'
-#     paginate_by = 3
-#     template_name = 'index.html'
-
 
 class PostCreateView(CreateView):
     model = Post
@@ -53,7 +47,7 @@ class PostCreateView(CreateView):
         messages.success(
             self.request, 'Your post has been created successfully.')
         return reverse_lazy("home:home")
-    #
+
     def form_valid(self, form):
         obj = form.save(commit=False)
         obj.author = self.request.user
@@ -126,16 +120,13 @@ def post_detail(request, year, month, day, post):
                                    publish__year=year,
                                    publish__month=month,
                                    publish__day=day)
-    # List of active comments for this post
+
     comments = post.comments.filter(active=True)
 
     if request.method == 'POST':
-        # A comment was posted
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
-            # Create Comment object but don't save to database yet
             new_comment = comment_form.save(commit=False)
-            # Assign the current post to the comment
             new_comment.post = post
             new_comment.save()
     else:
@@ -162,15 +153,4 @@ def post_search(request):
     )
 
 
-class AccountLogin(LoginView):
-    template_name = 'login.html'
 
-    def form_valid(self, form):
-        result = super().form_valid(form)
-
-        messages.success(
-            self.request,
-            f'User {self.request.user.username} logged in successfully'
-        )
-
-        return result

@@ -3,7 +3,7 @@ from django.urls import path, include
 
 from home import views
 from home.feeds import LatestPostsFeed
-from home.views import AccountLogin
+# from home.views import AccountLogin
 
 app_name = 'home'
 
@@ -15,5 +15,6 @@ urlpatterns = [
     url(r'^(?P<post_id>\d+)/share/$', views.post_share, name='post_share'),
     url('create_post/', views.PostCreateView.as_view(), name='create_post'),
     url(r'^feed/$', LatestPostsFeed(), name='post_feed'),
-    path('login/', AccountLogin.as_view(), name='login'),
+    # path('accounts/', include('django.contrib.auth.urls')),
+    path('login/', include('django.contrib.auth.urls')),
 ]
